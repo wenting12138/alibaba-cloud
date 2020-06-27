@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wenting.order.dao.OrderDao">
+
+    <resultMap id="BaseResultMap" type="com.wenting.order.domain.Order">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="userId" column="user_id" jdbcType="BIGINT"/>
+        <result property="productId" column="product_id" jdbcType="BIGINT"/>
+        <result property="count" column="count" jdbcType="INTEGER"/>
+        <result property="money" column="money" jdbcType="DECIMAL"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+    </resultMap>
+
+<!--    // 1. 下订单-->
+<!--    void create(Order order);-->
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.wenting.order.domain.Order">
+        insert into t_order(id, user_id, product_id, count, money, status)
+        values (null , #{userId}, #{productId}, #{count}, #{money}, 0)
+    </insert>
+
+<!--    // 2. 修改订单状态-->
+<!--    void update(@Param("userId") Long userId, @Param("status") Integer status);-->
+    <update id="update">
+        update t_order
+        set status = 1
+        where user_id = #{userId} and status = #{status}
+    </update>
+</mapper>

@@ -1,0 +1,17 @@
+server:
+  port: 9001
+
+
+spring:
+  application:
+    name: cloud-nacos-payment
+  cloud:
+    nacos:
+      discovery:
+        service: ${spring.application.name}
+        server-addr: localhost:8848
+management:
+  endpoints:
+    web:
+      exposure:
+        exclude: '*'

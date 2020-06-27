@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wenting.account.dao.AccountDao">
+
+    <resultMap id="baseResultMap" type="com.wenting.account.domain.Account">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="productId" column="product_id" jdbcType="BIGINT"/>
+        <result property="total" column="total" jdbcType="DECIMAL"/>
+        <result property="used" column="used" jdbcType="DECIMAL"/>
+        <result property="residue" column="residue" jdbcType="DECIMAL"/>
+    </resultMap>
+
+<!--    void decrease(@Param("userId") Long userId, @Param("count") BigDecimal money);-->
+    <update id="decrease">
+        update t_account
+        set used = used + #{money}, residue = residue - #{money}
+        where user_id = #{userId}
+    </update>
+</mapper>

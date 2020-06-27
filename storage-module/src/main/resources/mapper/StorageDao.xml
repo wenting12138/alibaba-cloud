@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wenting.storage.dao.StorageDao">
+
+    <resultMap id="baseResultMap" type="com.wenting.storage.domain.Storage">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="productId" column="product_id" jdbcType="BIGINT"/>
+        <result property="total" column="total" jdbcType="INTEGER"/>
+        <result property="used" column="used" jdbcType="INTEGER"/>
+        <result property="residue" column="residue" jdbcType="INTEGER"/>
+    </resultMap>
+
+<!--    void decrease(@Param("productId") Long productId, @Param("count") Integer count);-->
+    <update id="decrease">
+        update t_storage
+        set used = used + #{count}, residue = residue - #{count}
+        where product_id = #{productId}
+    </update>
+</mapper>
